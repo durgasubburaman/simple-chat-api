@@ -12,12 +12,18 @@ import (
 	"github.com/garyburd/redigo/redis"
 )
 
+// SimpleChatAPIVersion defines the version of the API
+const SimpleChatAPIVersion = "1.0"
+
 func main() {
 	// handle POST /api/messages/new
 	http.HandleFunc("/api/messages/new", PostNewMessage)
 
 	// handle GET /api/messages
 	http.HandleFunc("/api/messages", GetMessages)
+
+	// handle GET /api/version
+	http.HandleFunc("/api/version", GetVersion)
 
 	// start the http server
 	log.Printf("The Simple Chat API server has started and is listening on port %d...", 82)
@@ -65,6 +71,12 @@ func GetMessages(writer http.ResponseWriter, request *http.Request) {
 
 	writer.WriteHeader(http.StatusOK)
 	fmt.Fprint(writer, jsonMessages)
+}
+
+// GetVersion returns the version of the API
+func GetVersion(writer http.ResponseWriter, request *http.Request) {
+	writer.WriteHeader(http.StatusOK)
+	fmt.Fprint(writer, "Simple Chat - API Version: "+SimpleChatAPIVersion)
 }
 
 func getRedisClient() redis.Conn {
