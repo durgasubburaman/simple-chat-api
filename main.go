@@ -13,7 +13,7 @@ import (
 )
 
 // SimpleChatAPIVersion defines the version of the API
-const SimpleChatAPIVersion = "1.0"
+const SimpleChatAPIVersion = "1.1"
 
 func main() {
 	// handle POST /api/messages/new
