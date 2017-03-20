@@ -1,0 +1,9 @@
+FROM golang:1.8.0-windowsservercore
+
+MAINTAINER Julien Corioland, Microsoft, @jcorioland
+EXPOSE 82
+ENTRYPOINT /go/bin/simple-chat-api
+
+ADD . /go/src/github.com/jcorioland/simple-chat-api
+RUN go get github.com/garyburd/redigo/redis
+RUN go install github.com/jcorioland/simple-chat-api
